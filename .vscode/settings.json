@@ -1,0 +1,13 @@
+{
+    "liveServer.settings.AdvanceCustomBrowserCmdLine": "firefox",
+    "workbench.colorTheme": "Monokai",
+    "explorer.confirmDelete": false,
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+    },
+    "editor.largeFileOptimizations": false,
+    "editor.fontSize": 14,
+    "editor.tabSize": 4,
+    "files.autoSave": "onWindowChange",
+    "terminal.integrated.fontSize": 12
+}
