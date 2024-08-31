@@ -115,12 +115,24 @@ Tesla['MACD_hist'] = macdhist
 
 print(Tesla.head())
 
-from pynance import get_data
+# from pynance import get_data
 
 
-symbol = 'AAPL'  
-data = get_data(symbol, start_date='2023-01-01', end_date='2024-01-01')
-apple['PE_Ratio'] = apple['Close'] / apple['EPS']
+# symbol = 'AAPL'  
+# data = get_data(symbol, start_date='2023-01-01', end_date='2024-01-01')
+# apple['PE_Ratio'] = apple['Close'] / apple['EPS']
+
+apple['SMA_50'] = talib.SMA(apple['Close'], timeperiod=50)
+apple['SMA_200'] = talib.SMA(apple['Close'], timeperiod=200)
+apple['RSI'] = talib.RSI(apple['Close'], timeperiod=14)
+macd, macdsignal, macdhist = talib.MACD(apple['Close'], fastperiod=12, slowperiod=26, signalperiod=9)
+apple['MACD'] = macd
+apple['MACD_signal'] = macdsignal
+apple['MACD_hist'] = macdhist
+print(apple.head())
+
+
+
 
 apple['SMA_50'] = talib.SMA(apple['Close'], timeperiod=50)
 apple['SMA_200'] = talib.SMA(apple['Close'], timeperiod=200)
@@ -132,18 +144,6 @@ apple['MACD_hist'] = macdhist
 print(apple.head())
 
 
-apple['PE_Ratio'] = apple['Close'] / apple['EPS']
-
-apple['SMA_50'] = talib.SMA(apple['Close'], timeperiod=50)
-apple['SMA_200'] = talib.SMA(apple['Close'], timeperiod=200)
-apple['RSI'] = talib.RSI(apple['Close'], timeperiod=14)
-macd, macdsignal, macdhist = talib.MACD(apple['Close'], fastperiod=12, slowperiod=26, signalperiod=9)
-apple['MACD'] = macd
-apple['MACD_signal'] = macdsignal
-apple['MACD_hist'] = macdhist
-print(apple.head())
-
-amazon['PE_Ratio'] = amazon['Close'] / amazon['EPS']
 
 amazon['SMA_50'] = talib.SMA(amazon['Close'], timeperiod=50)
 amazon['SMA_200'] = talib.SMA(amazon['Close'], timeperiod=200)
@@ -154,7 +154,7 @@ amazon['MACD_signal'] = macdsignal
 amazon['MACD_hist'] = macdhist
 print(amazon.head())
 
-google['PE_Ratio'] = google['Close'] / google['EPS']
+
 
 google['SMA_50'] = talib.SMA(google['Close'], timeperiod=50)
 google['SMA_200'] = talib.SMA(google['Close'], timeperiod=200)
@@ -167,8 +167,6 @@ print(google.head())
 
 
 
-meta['PE_Ratio'] = meta['Close'] / meta['EPS']
-
 meta['SMA_50'] = talib.SMA(meta['Close'], timeperiod=50)
 meta['SMA_200'] = talib.SMA(meta['Close'], timeperiod=200)
 meta['RSI'] = talib.RSI(meta['Close'], timeperiod=14)
@@ -179,7 +177,7 @@ meta['MACD_hist'] = macdhist
 print(meta.head())
 
 
-microsoft['PE_Ratio'] = microsoft['Close'] / microsoft['EPS']
+
 
 microsoft['SMA_50'] = talib.SMA(microsoft['Close'], timeperiod=50)
 microsoft['SMA_200'] = talib.SMA(microsoft['Close'], timeperiod=200)
@@ -191,8 +189,6 @@ microsoft['MACD_hist'] = macdhist
 print(microsoft.head())
 
 
-nivada['PE_Ratio'] = nivada['Close'] / nivada['EPS']
-
 nivada['SMA_50'] = talib.SMA(nivada['Close'], timeperiod=50)
 nivada['SMA_200'] = talib.SMA(nivada['Close'], timeperiod=200)
 nivada['RSI'] = talib.RSI(nivada['Close'], timeperiod=14)
@@ -202,7 +198,7 @@ nivada['MACD_signal'] = macdsignal
 nivada['MACD_hist'] = macdhist
 print(nivada.head())
 
-Tesla['PE_Ratio'] = Tesla['Close'] / Tesla['EPS']
+
 
 Tesla['SMA_50'] = talib.SMA(Tesla['Close'], timeperiod=50)
 Tesla['SMA_200'] = talib.SMA(Tesla['Close'], timeperiod=200)
@@ -212,4 +208,20 @@ Tesla['MACD'] = macd
 Tesla['MACD_signal'] = macdsignal
 Tesla['MACD_hist'] = macdhist
 print(Tesla.head())
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+plt.figure(figsize=(14, 7))
+
+
+plt.plot(apple['Date'], apple['Close'], label='Close Price', color='blue', alpha=0.5)
+plt.plot(apple['Date'], apple['SMA_50'], label='SMA 50', color='orange', alpha=0.75)
+plt.plot(apple['Date'], apple['SMA_200'], label='SMA 200', color='red', alpha=0.75)
+plt.title('Stock Price with Moving Averages')
+plt.xlabel('Date')
+plt.ylabel('Price')
+plt.legend()
+plt.grid(True)
+plt.show()
 
